@@ -54,7 +54,7 @@
                      </GridPane.margin>
                   </ChoiceBox>
                   <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Button fx:id="newComponentButton" mnemonicParsing="false" onAction="#createNewComponent" text="+ New Component" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                  <Button fx:id="newComponentButton" mnemonicParsing="false" onAction="#openCreateComponentScene" text="+ New Component" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <TableView fx:id="adminTableView" layoutY="172.0" prefHeight="406.0" prefWidth="544.0">
