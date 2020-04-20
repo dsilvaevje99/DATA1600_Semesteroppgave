@@ -5,7 +5,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="center" hgap="10" prefHeight="577.0" prefWidth="544.0" vgap="10" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<GridPane alignment="center" hgap="10" prefHeight="577.0" prefWidth="544.0" vgap="10" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ComponentController">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
@@ -36,7 +38,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="newComponentButton" mnemonicParsing="false" onAction="#createNewComponent" text="Save Component" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+                  <Button fx:id="newComponentButton" mnemonicParsing="false" onAction="#createNewComponent" text="Save Component" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="TOP">
                      <GridPane.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </GridPane.margin>
@@ -65,7 +67,17 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <ChoiceBox fx:id="compTypeChoiceBox" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <ChoiceBox fx:id="compTypeChoiceBox" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" value="Processor">
+                      <items>
+                          <FXCollections fx:factory="observableArrayList">
+                              <String fx:value="Processor" />
+                              <String fx:value="Graphics card" />
+                              <String fx:value="RAM" />
+                              <String fx:value="Hard drive" />
+                              <String fx:value="Screen" />
+                          </FXCollections>
+                      </items>
+                  </ChoiceBox>
                   <Label text="Create New Component" GridPane.columnSpan="2147483647">
                      <font>
                         <Font size="18.0" />
@@ -76,6 +88,7 @@
                   </Label>
                   <TextField fx:id="compPriceField" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                   <TextField fx:id="compNameField" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Button fx:id="cancelButton" layoutX="283.0" layoutY="260.0" mnemonicParsing="false" onAction="#openAdminScene" text="Cancel" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                </children>
             </GridPane>
          </children>
