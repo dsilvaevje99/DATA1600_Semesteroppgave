@@ -117,7 +117,7 @@ public class ConfigurationController {
     public void saveUserConfig(ActionEvent actionEvent) throws IOException {
         //ERROR HANDLING: validate input values? make sure everything has a selection? If something is not selected, send error message to errorLabel.
         //create string from input values if everything is OK:
-        String newComponentString = System.lineSeparator()+processorChoiceBox.getValue()+"|"+graphicsChoiceBox.getValue()+"|"+ramChoiceBox.getValue()+"|"+driveChoiceBox.getValue()+"|"+screenChoiceBox.getValue()+"|"+keyboardFinalChoice+"|"+mouseFinalChoice;
+        String newComponentString = System.lineSeparator()+processorChoiceBox.getValue()+"|"+graphicsChoiceBox.getValue()+"|"+ramChoiceBox.getValue()+"|"+driveChoiceBox.getValue()+"|"+screenChoiceBox.getValue()+"|"+keyboardFinalChoice+"|"+mouseFinalChoice+"|"+totalPrice;
         //save to file
         Writer output;
         output = new BufferedWriter(new FileWriter("./src/sample/User Files/configurations.txt", true));
