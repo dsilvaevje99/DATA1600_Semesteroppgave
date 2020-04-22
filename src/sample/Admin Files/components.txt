@@ -1,0 +1,6 @@
+Processor|GeForce RTX 20|399
+Hard drive|Samsung 860 QVO 1TB SSD|150
+Screen|Samsung S24F356 24"|150
+RAM|Adata Spectrix D80 (16GB)|200
+Graphics card|MSI Radeon RX 580 (8GB)|180
+Processor|Intel Core i9-9900K|610

@@ -27,9 +27,9 @@ public class UserController {
     public void createNewConfig(ActionEvent actionEvent) throws IOException {
         //Open new scene:
         Parent configParent = FXMLLoader.load(getClass().getResource("Configuration.fxml"));
-        Scene loginScene = new Scene(configParent);
+        Scene configScene = new Scene(configParent);
         Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        window.setScene(loginScene);
+        window.setScene(configScene);
         window.show();
     }
 

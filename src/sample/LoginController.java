@@ -14,9 +14,9 @@ public class LoginController {
     public void openUserScene(ActionEvent actionEvent) throws IOException {
         //Open new scene:
         Parent userParent = FXMLLoader.load(getClass().getResource("User Page.fxml"));
-        Scene loginScene = new Scene(userParent);
+        Scene userScene = new Scene(userParent);
         Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        window.setScene(loginScene);
+        window.setScene(userScene);
         window.show();
     }
 
@@ -29,9 +29,9 @@ public class LoginController {
     public void openAdminScene(ActionEvent actionEvent) throws IOException {
         //Open new scene:
         Parent adminParent = FXMLLoader.load(getClass().getResource("Admin Page.fxml"));
-        Scene loginScene = new Scene(adminParent);
+        Scene adminScene = new Scene(adminParent);
         Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        window.setScene(loginScene);
+        window.setScene(adminScene);
         window.show();
     }
 

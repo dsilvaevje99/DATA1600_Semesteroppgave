@@ -42,7 +42,7 @@
                         <Insets bottom="10.0" left="10.0" top="10.0" />
                      </GridPane.margin>
                   </Button>
-                  <Label text="Processor" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                  <Label text="Processor *" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
@@ -50,7 +50,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label text="Graphics Card" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+                  <Label text="Graphics Card *" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
@@ -58,7 +58,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label text="RAM" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+                  <Label text="RAM *" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
@@ -66,7 +66,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label text="Hard Drive" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4">
+                  <Label text="Hard Drive *" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
@@ -74,7 +74,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label text="Keyboard" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6">
+                  <Label text="Keyboard *" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
@@ -82,7 +82,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label text="Mouse" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="7">
+                  <Label text="Mouse *" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="7">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
@@ -90,7 +90,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label text="Screen" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5">
+                  <Label text="Screen *" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
@@ -98,15 +98,23 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <ChoiceBox fx:id="processorChoiceBox" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <ChoiceBox fx:id="graphicsChoiceBox" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <ChoiceBox fx:id="ramChoiceBox" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                  <ChoiceBox fx:id="driveChoiceBox" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                  <CheckBox fx:id="keyboardYes" mnemonicParsing="false" onAction="#keyboardYesClicked" text="Yes" GridPane.columnIndex="2" GridPane.rowIndex="6" GridPane.valignment="TOP" />
-                  <CheckBox fx:id="keyboardNo" mnemonicParsing="false" onAction="#keyboardNoClicked" text="No" GridPane.columnIndex="2" GridPane.rowIndex="6" GridPane.valignment="BOTTOM" />
-                  <CheckBox fx:id="mouseYes" mnemonicParsing="false" onAction="#mouseYesClicked" text="Yes" GridPane.columnIndex="2" GridPane.rowIndex="7" GridPane.valignment="TOP" />
-                  <CheckBox fx:id="mouseNo" mnemonicParsing="false" onAction="#mouseNoClicked" text="No" GridPane.columnIndex="2" GridPane.rowIndex="7" GridPane.valignment="BOTTOM" />
-                  <ChoiceBox fx:id="screenChoiceBox" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <ChoiceBox fx:id="processorChoiceBox" onAction="#processorChosen" prefWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                  <ChoiceBox fx:id="graphicsChoiceBox" onAction="#graphicsChosen" prefWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+                  <ChoiceBox fx:id="ramChoiceBox" onAction="#ramChosen" prefWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                  <ChoiceBox fx:id="driveChoiceBox" onAction="#driveChosen" prefWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+                  <RadioButton fx:id="keyboardYes" mnemonicParsing="false" onAction="#keyboardSelected" text="Yes" GridPane.columnIndex="2" GridPane.rowIndex="6" GridPane.valignment="TOP">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="keyboard" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="keyboardNo" mnemonicParsing="false" onAction="#keyboardSelected" text="No" toggleGroup="$keyboard" GridPane.columnIndex="2" GridPane.rowIndex="6" GridPane.valignment="BOTTOM">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </RadioButton>
+                  <ChoiceBox fx:id="screenChoiceBox" onAction="#screenChosen" prefWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="5" />
                   <Label text="Computer Configuration" GridPane.columnSpan="2147483647">
                      <font>
                         <Font size="18.0" />
@@ -115,23 +123,36 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label fx:id="processorPriceBox" text="+ X NOK" textFill="#199b12" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                  <Label fx:id="mousePriceBox" text="+ X NOK" textFill="#199b12" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
-                  <Label fx:id="keyboardPriceBox" text="+ X NOK" textFill="#199b12" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
-                  <Label fx:id="screenPriceBox" text="+ X NOK" textFill="#199b12" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
-                  <Label fx:id="drivePriceBox" text="+ X NOK" textFill="#199b12" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
-                  <Label fx:id="ramPriceBox" text="+ X NOK" textFill="#199b12" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-                  <Label fx:id="graphicsPriceBox" text="+ X NOK" textFill="#199b12" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                  <Label fx:id="processorPriceBox" textFill="#199b12" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
+                  <Label fx:id="mousePriceBox" textFill="#199b12" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowIndex="7" />
+                  <Label fx:id="keyboardPriceBox" textFill="#199b12" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowIndex="6" />
+                  <Label fx:id="screenPriceBox" textFill="#199b12" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowIndex="5" />
+                  <Label fx:id="drivePriceBox" textFill="#199b12" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowIndex="4" />
+                  <Label fx:id="ramPriceBox" textFill="#199b12" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
+                  <Label fx:id="graphicsPriceBox" textFill="#199b12" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
                   <Label text="Total Price:" underline="true" GridPane.columnIndex="2" GridPane.rowIndex="8" GridPane.valignment="BOTTOM">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="totalPriceBox" text="X NOK" textFill="#199b12" GridPane.columnIndex="3" GridPane.rowIndex="8" GridPane.valignment="BOTTOM" />
+                  <Label fx:id="totalPriceBox" textFill="#199b12" GridPane.columnIndex="3" GridPane.rowIndex="8" GridPane.valignment="BOTTOM" />
                   <Button fx:id="cancelButton" layoutX="263.0" layoutY="509.0" mnemonicParsing="false" onAction="#openUserScene" text="Cancel" GridPane.columnIndex="1" GridPane.rowIndex="9">
                      <GridPane.margin>
                         <Insets top="10.0" />
                      </GridPane.margin></Button>
+                  <RadioButton fx:id="mouseYes" layoutX="219.0" layoutY="337.0" mnemonicParsing="false" onAction="#mouseSelected" text="Yes" GridPane.columnIndex="2" GridPane.rowIndex="7" GridPane.valignment="TOP">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="mouse" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="mouseNo" layoutX="219.0" layoutY="354.0" mnemonicParsing="false" onAction="#mouseSelected" text="No" toggleGroup="$mouse" GridPane.columnIndex="2" GridPane.rowIndex="7" GridPane.valignment="BOTTOM" />
+                  <Label fx:id="errorLabel" textFill="#eb0000" GridPane.columnSpan="4" GridPane.halignment="LEFT" GridPane.rowIndex="10" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding>
+                  </Label>
                </children>
             </GridPane>
          </children>
