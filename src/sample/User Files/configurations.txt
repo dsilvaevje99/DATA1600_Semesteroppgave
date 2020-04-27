@@ -1,1 +1,3 @@
-GeForce RTX 20, $399 USD|MSI Radeon RX 580 (8GB), $180 USD|Adata Spectrix D80 (16GB), $200 USD|Samsung 860 QVO 1TB SSD, $150 USD|Samsung S24F356 24", $150 USD|Keyboard No|Mouse Yes
+#,Processor,Graphics,RAM,Hard Drive,Screen,Keyboard,Mouse,Total in USD
+1,Intel Core i9-9900K ($610 USD),MSI Radeon RX 580 (8GB) ($180 USD),Adata Spectrix D80 (16GB) ($200 USD),Samsung 860 QVO 1TB SSD ($150 USD),Samsung S24F356 24" ($150 USD),Keyboard Yes,Mouse No,1340
+2,GeForce RTX 20 ($399 USD),MSI Radeon RX 580 (8GB) ($180 USD),Adata Spectrix D80 (16GB) ($200 USD),Samsung 860 QVO 1TB SSD ($150 USD),Samsung S24F356 24" ($150 USD),Keyboard No,Mouse Yes,1104

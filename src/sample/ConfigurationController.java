@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,10 +40,10 @@ public class ConfigurationController {
     public int totalPrice = 0;
     public int keyboardClicked = 0; //0 if none clicked, 1 if yes clicked, 2 if no clicked
     public int keyboardPrice = 50;
-    public String keyboardFinalChoice = "Keyboard No";
+    public String keyboardFinalChoice = "";
     public int mouseClicked = 0;  //0 if none clicked, 1 if yes clicked, 2 if no clicked
     public int mousePrice = 25;
-    public String mouseFinalChoice = "Mouse No";
+    public String mouseFinalChoice = "";
     public int lastProcessorPriceAdded = 0;
     public boolean processorChosen = false;
     public int lastGraphicsPriceAdded = 0;
@@ -66,30 +67,30 @@ public class ConfigurationController {
         //Loop through each line of components.txt file
         try {
             FileReader fr = new FileReader("./src/sample/Admin Files/components.txt");
-            BufferedReader br = new BufferedReader(fr);//read 'file'
+            BufferedReader br = new BufferedReader(fr);
             String line;
             while ((line = br.readLine()) != null) {
                 //For each line, split at | and check what type component is with line[0]
                 String[] lineArray = line.split("\\|");
                 //Add component info to arrays sorted by component type
                 if (lineArray[0].equals("Processor")) {
-                    String item = lineArray[1] + ", $" + lineArray[2] + " USD";
+                    String item = lineArray[1] + " ($" + lineArray[2] + " USD)";
                     processorComponents.add(item);
                 }
                 if (lineArray[0].equals("Hard drive")) {
-                    String item = lineArray[1] + ", $" + lineArray[2] + " USD";
+                    String item = lineArray[1] + " ($" + lineArray[2] + " USD)";
                     driveComponents.add(item);
                 }
                 if (lineArray[0].equals("Screen")) {
-                    String item = lineArray[1] + ", $" + lineArray[2] + " USD";
+                    String item = lineArray[1] + " ($" + lineArray[2] + " USD)";
                     screenComponents.add(item);
                 }
                 if (lineArray[0].equals("RAM")) {
-                    String item = lineArray[1] + ", $" + lineArray[2] + " USD";
+                    String item = lineArray[1] + " ($" + lineArray[2] + " USD)";
                     ramComponents.add(item);
                 }
                 if (lineArray[0].equals("Graphics card")) {
-                    String item = lineArray[1] + ", $" + lineArray[2] + " USD";
+                    String item = lineArray[1] + " ($" + lineArray[2] + " USD)";
                     graphicsComponents.add(item);
                 }
             }
@@ -115,21 +116,48 @@ public class ConfigurationController {
     }
 
     public void saveUserConfig(ActionEvent actionEvent) throws IOException {
-        //ERROR HANDLING: validate input values? make sure everything has a selection? If something is not selected, send error message to errorLabel.
+        //Make sure all fields have a value. If they dont have one, set the text of the error label and stop executing method.
+        if(!processorChosen || !graphicsChosen || !ramChosen || !driveChosen || !screenChosen || keyboardFinalChoice == "" || mouseFinalChoice == "") {
+            errorLabel.setText("All fields must have a selection!");
+            return;
+        }
+
+        int lastEntryNum = 0;
+        //Get the number of the last entry to number the next entry correctly
+        try {
+            FileReader fr = new FileReader("./src/sample/User Files/configurations.txt");
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+            while ((line = br.readLine()) != null) {
+                //For each line, split at , and check the number of last entry with line[0]
+                String[] lineArray = line.split(",");
+                //Try to parse the int from file entry
+                try {
+                    //Add entry number to lastEntryNum so that it contains the number of the last entry of the file
+                    lastEntryNum = Integer.parseInt(lineArray[0]);
+                }
+                //If it cannot parse, set last entry to 0 (meaning this will be the first entry of the file)
+                catch(NumberFormatException e) {
+                    lastEntryNum = 0;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         //create string from input values if everything is OK:
-        String newComponentString = System.lineSeparator()+processorChoiceBox.getValue()+"|"+graphicsChoiceBox.getValue()+"|"+ramChoiceBox.getValue()+"|"+driveChoiceBox.getValue()+"|"+screenChoiceBox.getValue()+"|"+keyboardFinalChoice+"|"+mouseFinalChoice+"|"+totalPrice;
+        String newEntryNum = Integer.toString(lastEntryNum+1);
+        String newComponentString = System.lineSeparator()+newEntryNum+","+processorChoiceBox.getValue()+","+graphicsChoiceBox.getValue()+","+ramChoiceBox.getValue()+","+driveChoiceBox.getValue()+","+screenChoiceBox.getValue()+","+keyboardFinalChoice+","+mouseFinalChoice+","+totalPrice;
         //save to file
         Writer output;
         output = new BufferedWriter(new FileWriter("./src/sample/User Files/configurations.txt", true));
         output.append(newComponentString);
         output.close();
-        //return to admin page
+        //return to user page
         openUserScene(actionEvent);
     }
 
     public void calculateTotalPrice(int price) {
-        int newTotal = totalPrice+price;
-        totalPrice = newTotal;
+        totalPrice += price;
         String totalString = "$"+totalPrice+" USD";
         totalPriceBox.setText(totalString);
     }
@@ -191,12 +219,11 @@ public class ConfigurationController {
         }
     }
 
-
     public void processorChosen(ActionEvent actionEvent) {
         String selectedItem = (String) processorChoiceBox.getValue();
         //Split string into name and price
         String[] selectedArray = selectedItem.split("\\$");
-        int curPrice = Integer.parseInt(selectedArray[1].substring(0, selectedArray[1].length()-4));
+        int curPrice = Integer.parseInt(selectedArray[1].substring(0, selectedArray[1].length()-5));
         //Set pricebox text
         String priceString = "+"+curPrice+" USD";
         processorPriceBox.setText(priceString);
@@ -218,7 +245,7 @@ public class ConfigurationController {
         String selectedItem = (String) graphicsChoiceBox.getValue();
         //Split string into name and price
         String[] selectedArray = selectedItem.split("\\$");
-        int curPrice = Integer.parseInt(selectedArray[1].substring(0, selectedArray[1].length()-4));
+        int curPrice = Integer.parseInt(selectedArray[1].substring(0, selectedArray[1].length()-5));
         //Set pricebox text
         String priceString = "+"+curPrice+" USD";
         graphicsPriceBox.setText(priceString);
@@ -240,7 +267,7 @@ public class ConfigurationController {
         String selectedItem = (String) ramChoiceBox.getValue();
         //Split string into name and price
         String[] selectedArray = selectedItem.split("\\$");
-        int curPrice = Integer.parseInt(selectedArray[1].substring(0, selectedArray[1].length()-4));
+        int curPrice = Integer.parseInt(selectedArray[1].substring(0, selectedArray[1].length()-5));
         //Set pricebox text
         String priceString = "+"+curPrice+" USD";
         ramPriceBox.setText(priceString);
@@ -262,7 +289,7 @@ public class ConfigurationController {
         String selectedItem = (String) driveChoiceBox.getValue();
         //Split string into name and price
         String[] selectedArray = selectedItem.split("\\$");
-        int curPrice = Integer.parseInt(selectedArray[1].substring(0, selectedArray[1].length()-4));
+        int curPrice = Integer.parseInt(selectedArray[1].substring(0, selectedArray[1].length()-5));
         //Set pricebox text
         String priceString = "+"+curPrice+" USD";
         drivePriceBox.setText(priceString);
@@ -284,7 +311,7 @@ public class ConfigurationController {
         String selectedItem = (String) screenChoiceBox.getValue();
         //Split string into name and price
         String[] selectedArray = selectedItem.split("\\$");
-        int curPrice = Integer.parseInt(selectedArray[1].substring(0, selectedArray[1].length()-4));
+        int curPrice = Integer.parseInt(selectedArray[1].substring(0, selectedArray[1].length()-5));
         //Set pricebox text
         String priceString = "+"+curPrice+" USD";
         screenPriceBox.setText(priceString);

@@ -49,10 +49,11 @@
             </GridPane>
             <TableView fx:id="userTableView" layoutY="209.0" prefHeight="366.0" prefWidth="544.0">
               <columns>
-                <TableColumn prefWidth="66.6666589975357" text="#" />
-                <TableColumn prefWidth="166.6666488647461" text="Date Created" />
-                  <TableColumn prefWidth="180.00001525878906" text="Total Price" />
-                  <TableColumn prefWidth="129.66665649414062" text=" " />
+                <TableColumn prefWidth="36.0" text="#" />
+                <TableColumn prefWidth="198.0" text="Selected Components" />
+                  <TableColumn prefWidth="104.0" text="Total Price" />
+                  <TableColumn prefWidth="104.0" text="**Edit btn**" />
+                  <TableColumn prefWidth="101.0" text="**Delete btn**" />
               </columns>
             </TableView>
          </children>

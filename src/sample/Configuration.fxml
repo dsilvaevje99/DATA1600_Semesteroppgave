@@ -145,13 +145,16 @@
                         <ToggleGroup fx:id="mouse" />
                      </toggleGroup></RadioButton>
                   <RadioButton fx:id="mouseNo" layoutX="219.0" layoutY="354.0" mnemonicParsing="false" onAction="#mouseSelected" text="No" toggleGroup="$mouse" GridPane.columnIndex="2" GridPane.rowIndex="7" GridPane.valignment="BOTTOM" />
-                  <Label fx:id="errorLabel" textFill="#eb0000" GridPane.columnSpan="4" GridPane.halignment="LEFT" GridPane.rowIndex="10" GridPane.valignment="CENTER">
+                  <Label fx:id="errorLabel" textFill="#eb0000" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
                      <font>
                         <Font size="17.0" />
                      </font>
                      <padding>
                         <Insets left="15.0" />
                      </padding>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
+                     </GridPane.margin>
                   </Label>
                </children>
             </GridPane>
