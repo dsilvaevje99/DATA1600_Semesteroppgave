@@ -13,7 +13,9 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class ConfigurationController {
 
@@ -57,8 +59,6 @@ public class ConfigurationController {
 
     @FXML
     private void initialize() {
-        //ERROR HANDLING: make sure the items from the file are in the right format? Delete them if they are somehow wrong?
-
         List<String> processorComponents = new ArrayList<>();
         List<String> graphicsComponents = new ArrayList<>();
         List<String> ramComponents = new ArrayList<>();
@@ -72,26 +72,68 @@ public class ConfigurationController {
             while ((line = br.readLine()) != null) {
                 //For each line, split at | and check what type component is with line[0]
                 String[] lineArray = line.split("\\|");
-                //Add component info to arrays sorted by component type
-                if (lineArray[0].equals("Processor")) {
-                    String item = lineArray[1] + " ($" + lineArray[2] + " USD)";
-                    processorComponents.add(item);
-                }
-                if (lineArray[0].equals("Hard drive")) {
-                    String item = lineArray[1] + " ($" + lineArray[2] + " USD)";
-                    driveComponents.add(item);
-                }
-                if (lineArray[0].equals("Screen")) {
-                    String item = lineArray[1] + " ($" + lineArray[2] + " USD)";
-                    screenComponents.add(item);
-                }
-                if (lineArray[0].equals("RAM")) {
-                    String item = lineArray[1] + " ($" + lineArray[2] + " USD)";
-                    ramComponents.add(item);
-                }
-                if (lineArray[0].equals("Graphics card")) {
-                    String item = lineArray[1] + " ($" + lineArray[2] + " USD)";
-                    graphicsComponents.add(item);
+                //ERROR HANDLING: If a line contains errors, skip it and print error message
+                //ERROR HANDLING: make sure the line read contains only 3 elements
+                if (lineArray.length == 3) {
+                    //ERROR HANDLING: make sure none of the array strings are empty or blank
+                    if (!lineArray[0].isEmpty() && !lineArray[0].isBlank() && !lineArray[1].isEmpty() && !lineArray[1].isBlank() && !lineArray[2].isEmpty() && !lineArray[2].isBlank()) {
+                        //ERROR HANDLING: make sure price string is a valid double
+                        boolean priceCheck;
+                        try {
+                            Double.parseDouble(lineArray[2]);
+                            priceCheck = true;
+                        } catch (NumberFormatException e) {
+                            System.out.println(e);
+                            priceCheck = false;
+                        }
+                        if(priceCheck) {
+                            //ERROR HANDLING: make sure all strings match the regex
+                            String componentTypeRegex = "[a-zA-Z '\\-]{3,20}";
+                            String componentNameRegex = "[\"a-zA-Z 0-9()'\\-]{3,40}";
+                            String componentPriceRegex = "[0-9.]{1,6}";
+                            if(Pattern.matches(componentTypeRegex, lineArray[0]) && Pattern.matches(componentNameRegex, lineArray[1]) && Pattern.matches(componentPriceRegex, lineArray[2])) {
+                                //Add component info to arrays sorted by component type
+                                switch (lineArray[0]) {
+                                    case "Processor": {
+                                        String item = lineArray[1] + " ($" + lineArray[2] + " USD)";
+                                        processorComponents.add(item);
+                                        break;
+                                    }
+                                    case "Hard drive": {
+                                        String item = lineArray[1] + " ($" + lineArray[2] + " USD)";
+                                        driveComponents.add(item);
+                                        break;
+                                    }
+                                    case "Screen": {
+                                        String item = lineArray[1] + " ($" + lineArray[2] + " USD)";
+                                        screenComponents.add(item);
+                                        break;
+                                    }
+                                    case "RAM": {
+                                        String item = lineArray[1] + " ($" + lineArray[2] + " USD)";
+                                        ramComponents.add(item);
+                                        break;
+                                    }
+                                    case "Graphics card": {
+                                        String item = lineArray[1] + " ($" + lineArray[2] + " USD)";
+                                        graphicsComponents.add(item);
+                                        break;
+                                    }
+                                    default:
+                                        System.out.println("ERROR: Component type not recognized: " + Arrays.toString(lineArray));
+                                        break;
+                                }
+                            } else {
+                                System.out.println("ERROR: One or more component attributes contains invalid characters, is too long, or too short: "+ Arrays.toString(lineArray));
+                            }
+                        } else {
+                            System.out.println("ERROR: Component price contains invalid characters: "+ Arrays.toString(lineArray));
+                        }
+                    } else {
+                        System.out.println("ERROR: One or more component attributes are empty: "+ Arrays.toString(lineArray));
+                    }
+                } else {
+                    System.out.println("ERROR: Component line contains invalid number of elements: "+ Arrays.toString(lineArray));
                 }
             }
         } catch (IOException e) {
@@ -116,8 +158,8 @@ public class ConfigurationController {
     }
 
     public void saveUserConfig(ActionEvent actionEvent) throws IOException {
-        //Make sure all fields have a value. If they dont have one, set the text of the error label and stop executing method.
-        if(!processorChosen || !graphicsChosen || !ramChosen || !driveChosen || !screenChosen || keyboardFinalChoice == "" || mouseFinalChoice == "") {
+        //ERROR HANDLING: Make sure all fields have a value. If they don't have one, set the text of the error label and stop executing method.
+        if(!processorChosen || !graphicsChosen || !ramChosen || !driveChosen || !screenChosen || keyboardFinalChoice.equals("") || mouseFinalChoice.equals("")) {
             errorLabel.setText("All fields must have a selection!");
             return;
         }
