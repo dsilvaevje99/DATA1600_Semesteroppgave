@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -53,8 +55,19 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </GridPane.margin>
                   </ChoiceBox>
-                  <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                   <ChoiceBox fx:id="compChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                       <items>
+                           <FXCollections fx:factory="observableArrayList">
+                               <String fx:value="Processor" />
+                               <String fx:value="Graphics card" />
+                               <String fx:value="RAM" />
+                               <String fx:value="Hard drive" />
+                               <String fx:value="Screen" />
+                           </FXCollections>
+                       </items>
+                   </ChoiceBox>
                   <Button fx:id="newComponentButton" mnemonicParsing="false" onAction="#openCreateComponentScene" text="+ New Component" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#viewComponents" text="View" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                </children>
             </GridPane>
             <TableView fx:id="adminTableView" layoutY="172.0" prefHeight="406.0" prefWidth="544.0">

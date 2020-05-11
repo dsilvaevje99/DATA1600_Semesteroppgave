@@ -11,10 +11,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
+import java.io.*;
+import java.util.ArrayList;
 
 public class ComponentController {
     public ChoiceBox<String> compTypeChoiceBox;
@@ -32,7 +30,7 @@ public class ComponentController {
         window.show();
     }
 
-    public void createNewComponent(ActionEvent actionEvent) throws IOException {
+    /*public void createNewComponent(ActionEvent actionEvent) throws IOException {
         //ERROR HANDLING: validate input values? Display errors in compErrorLabel
         //create string from input values
         String newComponentString = System.lineSeparator()+compTypeChoiceBox.getValue()+"|"+compNameField.getText()+"|"+compPriceField.getText();
@@ -41,6 +39,14 @@ public class ComponentController {
         output = new BufferedWriter(new FileWriter("./src/sample/Admin Files/components.txt", true));
         output.append(newComponentString);
         output.close();
+        //return to admin page
+        openAdminScene(actionEvent);
+    }*/
+
+    public void createNewComponent(ActionEvent actionEvent) throws IOException {
+        ComponentManager componentManager = new ComponentManager();
+        componentManager.create_component(compNameField.getText(), compTypeChoiceBox.getValue(), compPriceField.getText());
+        //ERROR HANDLING: validate input values? Display errors in compErrorLabel
         //return to admin page
         openAdminScene(actionEvent);
     }
