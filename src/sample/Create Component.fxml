@@ -89,7 +89,7 @@
                   <TextField fx:id="compPriceField" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                   <TextField fx:id="compNameField" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                   <Button fx:id="cancelButton" layoutX="283.0" layoutY="260.0" mnemonicParsing="false" onAction="#openAdminScene" text="Cancel" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Label fx:id="compErrorLabel" textFill="#eb0000" GridPane.columnSpan="4" GridPane.rowIndex="5" GridPane.rowSpan="2">
+                  <Label fx:id="compErrorLabel" textFill="#eb0000" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="5" GridPane.rowSpan="2">
                      <font>
                         <Font size="17.0" />
                      </font>
