@@ -66,24 +66,20 @@ public class ConfigurationController {
         List<String> screenComponents = new ArrayList<>();
         //Loop through each line of components.txt file
         try {
-            FileReader fr = new FileReader("./src/sample/Admin Files/components.txt");
-            BufferedReader br = new BufferedReader(fr);
-            String line;
-            while ((line = br.readLine()) != null) {
-                //For each line, split at | and check what type component is with line[0]
-                String[] lineArray = line.split("\\|");
+            ComponentManager componentManager = new ComponentManager();
+            ArrayList<Component> compList = componentManager.loadList();
+            for (Component comp : compList) {
                 //ERROR HANDLING: If a line contains errors, skip it and print error message
-                //ERROR HANDLING: make sure the line read contains only 3 elements
-                if (lineArray.length == 3) {
-                    //ERROR HANDLING: make sure none of the array strings are empty or blank
-                    if (!lineArray[0].isEmpty() && !lineArray[0].isBlank() && !lineArray[1].isEmpty() && !lineArray[1].isBlank() && !lineArray[2].isEmpty() && !lineArray[2].isBlank()) {
+                if (comp != null) {
+                    //ERROR HANDLING: make sure none of fields are empty
+                    if (comp.getName() != null && comp.getType() != null && comp.getPrice() != null) {
                         //ERROR HANDLING: make sure price string is a valid double
                         boolean priceCheck;
                         try {
-                            Double.parseDouble(lineArray[2]);
+                            Double.parseDouble(comp.getPrice());
                             priceCheck = true;
                         } catch (NumberFormatException e) {
-                            System.out.println(e);
+                            System.err.println(e);
                             priceCheck = false;
                         }
                         if(priceCheck) {
@@ -91,52 +87,52 @@ public class ConfigurationController {
                             String componentTypeRegex = "[a-zA-Z '\\-]{3,20}";
                             String componentNameRegex = "[\"a-zA-Z 0-9()'\\-]{3,40}";
                             String componentPriceRegex = "[0-9.]{1,6}";
-                            if(Pattern.matches(componentTypeRegex, lineArray[0]) && Pattern.matches(componentNameRegex, lineArray[1]) && Pattern.matches(componentPriceRegex, lineArray[2])) {
+                            if(true) {
                                 //Add component info to arrays sorted by component type
-                                switch (lineArray[0]) {
+                                switch (comp.getType()) {
                                     case "Processor": {
-                                        String item = lineArray[1] + " ($" + lineArray[2] + " USD)";
+                                        String item = comp.getName() + " ($" + comp.getPrice() + " USD)";
                                         processorComponents.add(item);
                                         break;
                                     }
                                     case "Hard drive": {
-                                        String item = lineArray[1] + " ($" + lineArray[2] + " USD)";
+                                        String item = comp.getName() + " ($" + comp.getPrice() + " USD)";
                                         driveComponents.add(item);
                                         break;
                                     }
                                     case "Screen": {
-                                        String item = lineArray[1] + " ($" + lineArray[2] + " USD)";
+                                        String item = comp.getName() + " ($" + comp.getPrice() + " USD)";
                                         screenComponents.add(item);
                                         break;
                                     }
                                     case "RAM": {
-                                        String item = lineArray[1] + " ($" + lineArray[2] + " USD)";
+                                        String item = comp.getName() + " ($" + comp.getPrice() + " USD)";
                                         ramComponents.add(item);
                                         break;
                                     }
                                     case "Graphics card": {
-                                        String item = lineArray[1] + " ($" + lineArray[2] + " USD)";
+                                        String item = comp.getName() + " ($" + comp.getPrice() + " USD)";
                                         graphicsComponents.add(item);
                                         break;
                                     }
                                     default:
-                                        System.out.println("ERROR: Component type not recognized: " + Arrays.toString(lineArray));
+                                        System.out.println("ERROR: Component type not recognized: " + comp.getType());
                                         break;
                                 }
                             } else {
-                                System.out.println("ERROR: One or more component attributes contains invalid characters, is too long, or too short: "+ Arrays.toString(lineArray));
+                                System.out.println("ERROR: One or more component attributes contains invalid characters, is too long, or too short: "+ comp.toString());
                             }
                         } else {
-                            System.out.println("ERROR: Component price contains invalid characters: "+ Arrays.toString(lineArray));
+                            System.out.println("ERROR: Component price contains invalid characters: "+ comp.getPrice());
                         }
                     } else {
-                        System.out.println("ERROR: One or more component attributes are empty: "+ Arrays.toString(lineArray));
+                        System.out.println("ERROR: One or more component attributes are empty: "+ compList.toString());
                     }
                 } else {
-                    System.out.println("ERROR: Component line contains invalid number of elements: "+ Arrays.toString(lineArray));
+                    System.out.println("ERROR: Component line contains invalid number of elements: "+ compList.toString());
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         //Add every component array items to corresponding choice box

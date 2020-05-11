@@ -45,7 +45,7 @@ public class ComponentController {
 
     public void createNewComponent(ActionEvent actionEvent) throws IOException {
         ComponentManager componentManager = new ComponentManager();
-        componentManager.create_component(compNameField.getText(), compTypeChoiceBox.getValue(), compPriceField.getText());
+        componentManager.create_component(compTypeChoiceBox.getValue(), compNameField.getText(), compPriceField.getText());
         //ERROR HANDLING: validate input values? Display errors in compErrorLabel
         //return to admin page
         openAdminScene(actionEvent);
