@@ -5,6 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <GridPane alignment="center" hgap="10" prefHeight="577.0" prefWidth="544.0" vgap="10" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.UserController">
    <columnConstraints>
       <ColumnConstraints />
@@ -49,11 +50,51 @@
             </GridPane>
             <TableView fx:id="userTableView" layoutY="209.0" prefHeight="366.0" prefWidth="544.0">
               <columns>
-                <TableColumn prefWidth="36.0" text="#" />
-                <TableColumn prefWidth="198.0" text="Selected Components" />
-                  <TableColumn prefWidth="104.0" text="Total Price" />
-                  <TableColumn prefWidth="104.0" text="**Edit btn**" />
-                  <TableColumn prefWidth="101.0" text="**Delete btn**" />
+                <TableColumn minWidth="15.0" text="#" >
+                    <cellValueFactory>
+                        <PropertyValueFactory property="number" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn minWidth="180" text="Processor" >
+                    <cellValueFactory>
+                        <PropertyValueFactory property="processor" />
+                    </cellValueFactory>
+                </TableColumn>
+                  <TableColumn minWidth="220" text="Graphics" >
+                      <cellValueFactory>
+                          <PropertyValueFactory property="graphics" />
+                      </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn minWidth="240" text="RAM" >
+                      <cellValueFactory>
+                          <PropertyValueFactory property="ram" />
+                      </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn minWidth="240" text="Hard Drive" >
+                      <cellValueFactory>
+                          <PropertyValueFactory property="hdd" />
+                      </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn minWidth="260" text="Motherboard" >
+                      <cellValueFactory>
+                          <PropertyValueFactory property="motherboard" />
+                      </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn minWidth="100" text="Keyboard" >
+                      <cellValueFactory>
+                          <PropertyValueFactory property="keyboard" />
+                      </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn minWidth="100" text="Mouse" >
+                      <cellValueFactory>
+                          <PropertyValueFactory property="mouse" />
+                      </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn minWidth="50" text="Total" >
+                      <cellValueFactory>
+                          <PropertyValueFactory property="total" />
+                      </cellValueFactory>
+                  </TableColumn>
               </columns>
             </TableView>
          </children>
