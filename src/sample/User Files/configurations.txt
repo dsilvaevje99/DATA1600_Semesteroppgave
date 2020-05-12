@@ -1,4 +1,3 @@
-
 1,AMD Ryzen 5 3600 ($170 USD),MSI B450 TOMAHAWK MAX (AM4) ($115 USD),MSI Radeon RX 580 (8GB) ($180 USD),Corsair Vengeance LPX 16 GB ($80 USD),Seagate Barracuda Compute 2TB ($60 USD),Keyboard Yes,Mouse Yes,680
 2,Intel Core i9-9900K ($610 USD),MSI Z390-A PRO (LGA1151) ($135 USD),GeForce RTX 2080 Super ($1000 USD),Corsair Vengeance RGB Pro 256 GB ($1285 USD),Seagate IronWolf Pro 16TB ($500 USD),Keyboard Yes,Mouse Yes,3605
 3,AMD Ryzen 7 2700X ($300 USD),Asus TUF GAMING X570-PLUS (AM4) ($190 USD),GeForce RTX 2060 SUPER ($400 USD),Corsair Vengeance LPX 16 GB ($80 USD),Samsung 970 Evo 1TB ($180 USD),Keyboard Yes,Mouse No,1200

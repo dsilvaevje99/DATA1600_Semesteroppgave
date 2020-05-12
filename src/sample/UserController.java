@@ -48,9 +48,9 @@ public class UserController implements Initializable {
             try {
                 String[] line = sc.nextLine().split(",");
 
-                configurationList.add(new Configuration(line[0],line[1],line[2],line[3],line[4],line[5],line[6],line[7], line [8]));
+                configurationList.add(new Configuration(line[0],line[1],line[2],line[3],line[4],line[5],line[6],line[7],line[8]));
             } catch (Exception e) {
-                System.out.println("Error: " + e);
+                System.out.println("Error: " + e +"when loading configurations in UserController.java");
             }
         }
         userTableView.getItems().clear();
