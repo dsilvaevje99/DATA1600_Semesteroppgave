@@ -43,7 +43,7 @@ public class AdminController {
 
     public void viewComponents(ActionEvent actionEvent) {
         ComponentManager componentManager = new ComponentManager();
-        List<Component> sortedList = componentManager.refineList("All");
+        List<Component> sortedList = componentManager.refineList(compChoiceBox.getValue().toString());
         //populate list with results here
         adminTableView.getItems().clear();
         adminTableView.getItems().addAll(sortedList);
