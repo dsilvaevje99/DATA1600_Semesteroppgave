@@ -74,6 +74,8 @@
                               <String fx:value="Graphics card" />
                               <String fx:value="RAM" />
                               <String fx:value="Hard drive" />
+                              <String fx:value="Motherboard" />
+                              <String fx:value="Power Supply" />
                               <String fx:value="Screen" />
                           </FXCollections>
                       </items>

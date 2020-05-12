@@ -24,7 +24,7 @@ public class ConfigurationController {
     public ChoiceBox graphicsChoiceBox;
     public ChoiceBox ramChoiceBox;
     public ChoiceBox driveChoiceBox;
-    public ChoiceBox screenChoiceBox;
+    public ChoiceBox motherboardChoiceBox;
     public RadioButton keyboardYes;
     public RadioButton keyboardNo;
     public RadioButton mouseYes;
@@ -63,11 +63,11 @@ public class ConfigurationController {
         List<String> graphicsComponents = new ArrayList<>();
         List<String> ramComponents = new ArrayList<>();
         List<String> driveComponents = new ArrayList<>();
-        List<String> screenComponents = new ArrayList<>();
+        List<String> motherboardComponents = new ArrayList<>();
         //Loop through each line of components.txt file
         try {
             ComponentManager componentManager = new ComponentManager();
-            ArrayList<Component> compList = componentManager.loadList();
+            List<Component> compList = componentManager.loadList();
             for (Component comp : compList) {
                 //ERROR HANDLING: If a line contains errors, skip it and print error message
                 if (comp != null) {
@@ -100,9 +100,9 @@ public class ConfigurationController {
                                         driveComponents.add(item);
                                         break;
                                     }
-                                    case "Screen": {
+                                    case "Motherboard": {
                                         String item = comp.getName() + " ($" + comp.getPrice() + " USD)";
-                                        screenComponents.add(item);
+                                        motherboardComponents.add(item);
                                         break;
                                     }
                                     case "RAM": {
@@ -142,8 +142,8 @@ public class ConfigurationController {
         driveChoiceBox.setItems(FXCollections.observableArrayList(
                 driveComponents
         ));
-        screenChoiceBox.setItems(FXCollections.observableArrayList(
-                screenComponents
+        motherboardChoiceBox.setItems(FXCollections.observableArrayList(
+                motherboardComponents
         ));
         ramChoiceBox.setItems(FXCollections.observableArrayList(
                 ramComponents
@@ -184,7 +184,7 @@ public class ConfigurationController {
         }
         //create string from input values if everything is OK:
         String newEntryNum = Integer.toString(lastEntryNum+1);
-        String newComponentString = System.lineSeparator()+newEntryNum+","+processorChoiceBox.getValue()+","+graphicsChoiceBox.getValue()+","+ramChoiceBox.getValue()+","+driveChoiceBox.getValue()+","+screenChoiceBox.getValue()+","+keyboardFinalChoice+","+mouseFinalChoice+","+totalPrice;
+        String newComponentString = System.lineSeparator()+newEntryNum+","+processorChoiceBox.getValue()+","+motherboardChoiceBox.getValue()+","+graphicsChoiceBox.getValue()+","+ramChoiceBox.getValue()+","+driveChoiceBox.getValue()+","+keyboardFinalChoice+","+mouseFinalChoice+","+totalPrice;
         //save to file
         Writer output;
         output = new BufferedWriter(new FileWriter("./src/sample/User Files/configurations.txt", true));
@@ -346,7 +346,7 @@ public class ConfigurationController {
     }
 
     public void screenChosen(ActionEvent actionEvent) {
-        String selectedItem = (String) screenChoiceBox.getValue();
+        String selectedItem = (String) motherboardChoiceBox.getValue();
         //Split string into name and price
         String[] selectedArray = selectedItem.split("\\$");
         int curPrice = Integer.parseInt(selectedArray[1].substring(0, selectedArray[1].length()-5));
