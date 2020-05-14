@@ -15,7 +15,7 @@ public class ComponentManager {
         try {
             compList = loadList();
         } catch (Exception e) {
-            System.err.println("error occured:" + e);
+            System.err.println("ERROR: An error occured: " + e);
         }
     }
 
@@ -25,10 +25,9 @@ public class ComponentManager {
             try {
                 compList = loadList();
             }catch (Exception e){
-                System.out.println("list not found, starting from empty list");
+                System.out.println("CREATE_COMPONENT: list not found, starting from empty list.");
             }
         }
-        //ERROR HANDLING: validate input values? Display errors in compErrorLabel
         Component comp = new Component(name, type, price);
         compList.add(comp);
         //save to file
@@ -36,7 +35,7 @@ public class ComponentManager {
             //sorts list and saves it
             saveList(sortList(compList));
         } catch (Exception e){
-            System.err.println("error in saving file" + e);
+            System.err.println("ERROR: Couldnt save component to file: " + e);
         }
         //indicates list has been changed
         list_changed = true;
