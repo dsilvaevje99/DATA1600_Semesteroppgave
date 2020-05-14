@@ -3,16 +3,20 @@ package sample;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class AdminController {
+public class AdminController implements Initializable {
 
     public Button newComponentButton;
     public TableView adminTableView;
@@ -24,6 +28,24 @@ public class AdminController {
     public Label loadErrorLabel;
 
     private ComponentThread task;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        //On page load, show all components
+        task = new ComponentThread("All");
+        task.setOnSucceeded(this::threadDone);
+        task.setOnFailed(this::threadFailed);
+        Thread th = new Thread(task);
+        th.setDaemon(true);
+        newComponentButton.setDisable(true);
+        adminTableView.setDisable(true);
+        logOutButton.setDisable(true);
+        compChoiceBox.setDisable(true);
+        deleteSearchField.setDisable(true);
+        viewCompButton.setDisable(true);
+        deleteCompButton.setDisable(true);
+        th.start();
+    }
 
     public void logOut(ActionEvent actionEvent) throws IOException {
         //Log out code
@@ -45,7 +67,8 @@ public class AdminController {
     }
 
     public void viewComponents(ActionEvent actionEvent) {
-        task = new ComponentThread();
+        String type = compChoiceBox.getValue().toString();
+        task = new ComponentThread(type);
         task.setOnSucceeded(this::threadDone);
         task.setOnFailed(this::threadFailed);
         Thread th = new Thread(task);
