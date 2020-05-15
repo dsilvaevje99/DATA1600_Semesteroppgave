@@ -38,4 +38,6 @@ public class User implements Serializable {
     public boolean isSuperUser() {
         return superUser;
     }
+
+    private static final long serialVersionUID = 6929685098267757690L;
 }

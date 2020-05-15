@@ -28,8 +28,8 @@
               </columnConstraints>
               <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="49.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <Button fx:id="logOutButton" mnemonicParsing="false" onAction="#logOut" text="Log Out" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
@@ -50,7 +50,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </GridPane.margin>
                   </Label>
-                   <ChoiceBox fx:id="compChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" value="All">
+                   <ChoiceBox fx:id="compChoiceBox" prefWidth="150.0" value="All" GridPane.columnIndex="1" GridPane.rowIndex="2">
                        <items>
                            <FXCollections fx:factory="observableArrayList">
                                <String fx:value="All" />
@@ -62,25 +62,41 @@
                            </FXCollections>
                        </items>
                    </ChoiceBox>
-                  <Button fx:id="newComponentButton" mnemonicParsing="false" onAction="#openCreateComponentScene" text="+ New Component" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                  <Button fx:id="newComponentButton" mnemonicParsing="false" onAction="#openCreateComponentScene" text="+ New Component" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
                   <Button fx:id="viewCompButton" mnemonicParsing="false" onAction="#viewComponents" text="View" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <TextField fx:id="deleteSearchField" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                  <Button fx:id="deleteCompButton" layoutX="485.0" layoutY="20.0" mnemonicParsing="false" onAction="#deleteComponent" text="Delete" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                  <TextField fx:id="deleteSearchField" minWidth="-Infinity" prefWidth="50.0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="80.0" />
+                     </GridPane.margin></TextField>
+                  <Button fx:id="deleteCompButton" layoutX="485.0" layoutY="20.0" mnemonicParsing="false" onAction="#deleteComponent" text="Delete" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin></Button>
                   <Label fx:id="loadErrorLabel" textFill="#eb0000" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="CENTER">
                      <GridPane.margin>
                         <Insets left="30.0" right="30.0" />
                      </GridPane.margin>
                   </Label>
+                  <Label fx:id="bruh" text="ID:" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets right="55.0" />
+                     </GridPane.margin></Label>
+                  <Button fx:id="editCompButton" layoutX="454.0" layoutY="149.0" mnemonicParsing="false" onAction="#openEditComponentScene" text="- Edit Component" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
                </children>
             </GridPane>
             <TableView fx:id="adminTableView" layoutY="172.0" prefHeight="406.0" prefWidth="544.0">
               <columns>
+                  <TableColumn fx:id="idColumn" minWidth="10.0" prefWidth="20.0" text="ID">
+                      <cellValueFactory>
+                          <PropertyValueFactory property="id" />
+                      </cellValueFactory>
+                  </TableColumn>
                 <TableColumn fx:id="compColumn" minWidth="130.0" text="Component Type">
                   <cellValueFactory>
                       <PropertyValueFactory property="type" />
                   </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="nameColumn" minWidth="320.0" text="Name">
+                <TableColumn fx:id="nameColumn" minWidth="300.0" text="Name">
                   <cellValueFactory>
                       <PropertyValueFactory property="name" />
                   </cellValueFactory>

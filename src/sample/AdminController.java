@@ -26,6 +26,7 @@ public class AdminController implements Initializable {
     public Button viewCompButton;
     public Button deleteCompButton;
     public Label loadErrorLabel;
+    public Button editCompButton;
 
     private ComponentThread task;
 
@@ -44,6 +45,7 @@ public class AdminController implements Initializable {
         deleteSearchField.setDisable(true);
         viewCompButton.setDisable(true);
         deleteCompButton.setDisable(true);
+        editCompButton.setDisable(true);
         th.start();
     }
 
@@ -66,6 +68,15 @@ public class AdminController implements Initializable {
         window.show();
     }
 
+    public void openEditComponentScene(ActionEvent actionEvent) throws IOException {
+        //Open new scene:
+        Parent editParent = FXMLLoader.load(getClass().getResource("Edit Component.fxml"));
+        Scene editScene = new Scene(editParent);
+        Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        window.setScene(editScene);
+        window.show();
+    }
+
     public void viewComponents(ActionEvent actionEvent) {
         String type = compChoiceBox.getValue().toString();
         task = new ComponentThread(type);
@@ -80,6 +91,7 @@ public class AdminController implements Initializable {
         deleteSearchField.setDisable(true);
         viewCompButton.setDisable(true);
         deleteCompButton.setDisable(true);
+        editCompButton.setDisable(true);
         th.start();
     }
 
@@ -96,6 +108,7 @@ public class AdminController implements Initializable {
         deleteSearchField.setDisable(false);
         viewCompButton.setDisable(false);
         deleteCompButton.setDisable(false);
+        editCompButton.setDisable(false);
     }
 
     private void threadFailed(WorkerStateEvent event) {
@@ -111,6 +124,7 @@ public class AdminController implements Initializable {
         deleteSearchField.setDisable(false);
         viewCompButton.setDisable(false);
         deleteCompButton.setDisable(false);
+        editCompButton.setDisable(false);
     }
 
     public void deleteComponent(ActionEvent actionEvent) throws IOException, ClassNotFoundException {

@@ -9,6 +9,8 @@ public class UserManager {
 
     public UserManager(){
         try {
+            //create user in case user file doesnt work properly
+            //create_user("admin", "password", true);
             users = loadList();
         } catch (Exception e) {
             System.err.println("error occured:" + e);

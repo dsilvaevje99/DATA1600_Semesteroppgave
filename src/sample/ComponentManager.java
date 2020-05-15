@@ -28,8 +28,41 @@ public class ComponentManager {
                 System.out.println("CREATE_COMPONENT: list not found, starting from empty list.");
             }
         }
-        Component comp = new Component(name, type, price);
+        Component comp = new Component(Integer.toString(compList.size()), name, type, price);
         compList.add(comp);
+        //save to file
+        try {
+            //sorts list and saves it
+            saveList(sortList(compList));
+        } catch (Exception e){
+            System.err.println("ERROR: Couldnt save component to file: " + e);
+        }
+        //indicates list has been changed
+        list_changed = true;
+    }
+
+    public void edit_component(String name, String type, String price, String id) {
+        //refreshes list if it has been changed since last time
+        if (list_changed){
+            try {
+                compList = loadList();
+            }catch (Exception e){
+                System.out.println("EDIT_COMPONENT: list not found");
+            }
+        }
+        int index = Integer.parseInt(id);
+        Component comp = compList.get(index);
+        if (!name.equals("")){
+            comp.setName(name);
+        }
+
+        if (!type.equals("")){
+            comp.setType(type);
+        }
+
+        if (!price.equals("")){
+            comp.setPrice(price);
+        }
         //save to file
         try {
             //sorts list and saves it
@@ -45,7 +78,16 @@ public class ComponentManager {
         if (list_changed){
             compList = loadList();
         }
-        compList.removeIf(comp -> comp.getName().contains(query));
+        compList.removeIf(comp -> comp.getId().equals(query));
+        int deleted = Integer.parseInt(query);
+        for (Component comp : compList){
+            int index = Integer.parseInt(comp.getId());
+            if (index > deleted){
+                index--;
+                String newId = Integer.toString(index);
+                comp.setId(newId);
+            }
+        }
         saveList(compList);
         list_changed = true;
     }

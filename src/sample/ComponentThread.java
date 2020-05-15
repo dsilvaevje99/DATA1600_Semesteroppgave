@@ -15,7 +15,7 @@ public class ComponentThread extends Task<List<Component>> {
     @Override
     protected List<Component> call() throws InterruptedException {
         //Some seconds delay
-        TimeUnit.SECONDS.sleep(3);
+        TimeUnit.SECONDS.sleep(1);
 
         //Get components
         ComponentManager componentManager = new ComponentManager();
