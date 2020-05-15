@@ -3,3 +3,4 @@
 3,AMD Ryzen 7 2700X ($300 USD),Asus TUF GAMING X570-PLUS (AM4) ($190 USD),GeForce RTX 2060 SUPER ($400 USD),Corsair Vengeance LPX 16 GB ($80 USD),Samsung 970 Evo 1TB ($180 USD),Keyboard Yes,Mouse No,1200
 4,Intel Core i7-3770K ($500 USD),MSI Z390-A PRO (LGA1151) ($135 USD),Radeon RX 5700 XT ($410 USD),G.Skill Trident Z Neo 32 GB ($180 USD),Samsung 970 Evo 1TB ($180 USD),Keyboard No,Mouse No,1405
 5,AMD Ryzen 7 3700X ($300 USD),Asus TUF GAMING X570-PLUS (AM4) ($190 USD),GeForce RTX 2060 SUPER ($400 USD),Corsair Vengeance LPX 16 GB ($80 USD),Samsung 970 Evo 1TB ($180 USD),Keyboard No,Mouse No,1150
+6,Intel Core i9-9900K ($515 USD),MSI B450 TOMAHAWK MAX AM4 ($115 USD),GeForce RTX 2080 Ti ($1280 USD),G Skill Trident Z RGB 16 GB ($100 USD),Seagate BarraCuda 4TB ($95 USD),Keyboard No,Mouse Yes,2130
